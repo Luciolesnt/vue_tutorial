@@ -1,7 +1,8 @@
 <template>
   <section>
     <h1 v-if="show">Hello {{ message }}</h1>
-    <button @click="increment">{{ compteur }}</button>
+    <button @click="increment">{{ getTotal }}</button>
+    <p>Le double du total est de {{ getDoubleTotal }}</p>
     <p>Login: <input type="text" v-model="user" /></p>
     <h2>Vous êtes connecté en tant que {{ user }}</h2>
     <section>
@@ -49,7 +50,6 @@ export default {
       message: "World",
       show: true,
       produits: ["Pizza", "Hamburger", "Cheese", "Tacos"],
-      compteur: 0,
       pourcentage: 60.7,
       estActif: true,
       affichage: "",
@@ -58,9 +58,21 @@ export default {
         "https://img.freepik.com/free-vector/cute-corgi-dog-sitting-cartoon-vector-icon-illustration-animal-nature-icon-concept-isolated-premium-vector-flat-cartoon-style_138676-4181.jpg?w=826&t=st=1661935723~exp=1661936323~hmac=73916fd3c0834f1947a90ec2db8c7d48e40811300a7474057d1768a8478ee87e",
     };
   },
+  computed: {
+    getTotal() {
+      return this.$store.state.total;
+    },
+    getDoubleTotal() {
+      return this.$store.getters.doubleTotal;
+    },
+    // TODO ... => implement userName from the store
+    getUser() {
+      return this.$store.state.userName;
+    },
+  },
   methods: {
     increment() {
-      this.compteur += 1;
+      this.$store.commit("setTotal");
     },
     order(produit) {
       this.commandes.push(produit);
