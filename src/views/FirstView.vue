@@ -35,6 +35,7 @@
 
 <script>
 import ProductsComponent from "../components/ProductsComponent.vue";
+import { useStore } from "vuex";
 export default {
   beforeCreate: () => console.log("Before Created"),
   created: () => console.log("Created"),
@@ -44,6 +45,10 @@ export default {
   updated: () => console.log("Updated"),
   beforeUnmount: () => console.log("Before Destroy / Unmount"),
   unmounted: () => console.log("Destroyed / Unmounted"),
+  setup() {
+    const store = useStore();
+    console.log(store);
+  },
   data() {
     return {
       user: "Lucie",
@@ -83,14 +88,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scope>
-button {
-  color: white;
-  background-color: black;
-  border: none;
-  cursor: pointer;
-  &.selected {
-    background-color: pink;
-  }
-}
+<style lang="scss">
+@import "../styles/firstView.scss";
 </style>
